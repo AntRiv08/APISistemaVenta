@@ -42,8 +42,8 @@ namespace SistemaVenta.BLL.Servicios
             try
             {
                 var queryUsuario = await _usuarioRepositorio.Consultar(u =>
-                u.Correo == correo &&
-                u.Clave == clave);
+                u.Correo == correo.Trim() &&
+                u.Clave == clave.Trim());
                 if (queryUsuario.FirstOrDefault() == null)
                     throw new TaskCanceledException("El usuario no existe");
 
@@ -89,7 +89,7 @@ namespace SistemaVenta.BLL.Servicios
                 usuarioEncontrado.EsActivo = usuarioModelo.EsActivo;
 
                 bool respuesta = await _usuarioRepositorio.Editar(usuarioEncontrado);
-                if (respuesta)
+                if (!respuesta)
                     throw new TaskCanceledException("No se pudo editar");
 
                 return respuesta;

@@ -64,7 +64,7 @@ namespace SistemaVenta.BLL.Servicios.Contrato
                 productoEncontrado.EsActivo = productoModelo.EsActivo;
 
                 bool respuesta = await _productoRepositorio.Editar(productoEncontrado);
-                if (respuesta)
+                if (!respuesta)
                     throw new TaskCanceledException("No se pudo editar");
 
                 return respuesta;
@@ -85,7 +85,7 @@ namespace SistemaVenta.BLL.Servicios.Contrato
                     throw new TaskCanceledException("El producto no existe");
 
                 bool respuesta = await _productoRepositorio.Eliminar(productoEncontrado);
-                if (respuesta)
+                if (!respuesta)
                     throw new TaskCanceledException("No se pudo eliminar");
 
                 return respuesta;
